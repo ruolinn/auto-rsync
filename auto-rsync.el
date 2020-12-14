@@ -38,7 +38,7 @@
                                                      (file-name-as-directory (cdr x))))
                                    auto-rsync-dir-alist))
          ;;(sync-pair (assoc-if (lambda (key) (string-match key buffer-file-name)) normalized-alist)))
-         (sync-pair (assoc-if (lambda (key) (string-match-p name key)) normalized-alist)))
+         (sync-pair (cl-assoc-if (lambda (key) (string-match-p name key)) normalized-alist)))
     (or sync-pair
         (message "project %s not exists" name)
         (message "%s" (car sync-pair))
@@ -55,7 +55,7 @@
   (let* ((normalized-alist (mapcar (lambda (x) (cons (file-name-as-directory (expand-file-name (car x)))
                                                      (file-name-as-directory (cdr x))))
                                    auto-rsync-dir-alist))
-         (sync-pair (assoc-if (lambda (key) (string-match key buffer-file-name)) normalized-alist)))
+         (sync-pair (cl-assoc-if (lambda (key) (string-match key buffer-file-name)) normalized-alist)))
     (when sync-pair
       (let* ((file (substring buffer-file-name (length (car sync-pair))))
              (local (concat (car sync-pair) file))
